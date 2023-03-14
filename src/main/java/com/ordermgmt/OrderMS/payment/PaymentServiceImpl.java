@@ -1,5 +1,6 @@
 package com.ordermgmt.OrderMS.payment;
 
+import com.ordermgmt.OrderMS.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +47,11 @@ public class PaymentServiceImpl implements PaymentService {
         List<Payment> allPayment = repository.findAll();
         if(allPayment.isEmpty()) return null;
         return allPayment;
+    }
+
+    public Order retrievePaymentOrder(long paymentId) {
+        Order order = repository.retrievePaymentOrder(paymentId);
+        if(order ==null) return null;
+        return order;
     }
 }

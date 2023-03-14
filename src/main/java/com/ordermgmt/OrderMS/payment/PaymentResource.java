@@ -1,5 +1,6 @@
 package com.ordermgmt.OrderMS.payment;
 
+import com.ordermgmt.OrderMS.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,13 @@ public class PaymentResource {
         return ResponseEntity.ok(payment);
     }
 
+    @GetMapping("/payments/{paymentId}/order")
+    ResponseEntity<Object> retrievePaymentOrder(@PathVariable long paymentId){
+        Order order = paymentService.retrievePaymentOrder(paymentId);
+        if(order == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(order);
+    }
+
     @RequestMapping(value = "/payments", method = RequestMethod.POST)
     ResponseEntity<Object> addPayment(@RequestBody Payment payment){
         paymentService.addPayment(payment);
@@ -49,4 +57,6 @@ public class PaymentResource {
                 .path("/{paymentId}").buildAndExpand(payment.getId()).toUri();
         return ResponseEntity.ok(location);
     }
+
+
 }

@@ -17,6 +17,9 @@ public class PaymentCommandLineRunner implements CommandLineRunner {
     @Autowired
     CustomerRepository customerRepository;
 
+    @Autowired
+    PaymentRepository paymentRepository;
+
     @Override
     public void run(String... args) throws Exception {
 //        Payment payment1 = new Payment(1l,500,"UPI","success",new java.sql.Date(System.currentTimeMillis()));
@@ -28,5 +31,7 @@ public class PaymentCommandLineRunner implements CommandLineRunner {
 //        paymentService.addPayment(payment2);
 //        paymentService.addPayment(payment3);
 //        paymentService.addPayment(payment4);
+        paymentRepository.retrievePaymentOrder(1);
+
     }
 }

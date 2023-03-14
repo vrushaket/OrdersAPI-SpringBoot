@@ -20,7 +20,6 @@ public class Food {
     private int price;
 
     @JsonIgnore
-    @JsonBackReference
     @ManyToMany(mappedBy = "foods")
     private List<Order> orders;
 

@@ -1,8 +1,8 @@
 package com.ordermgmt.OrderMS.customer;
 import com.ordermgmt.OrderMS.order.Order;
 import com.ordermgmt.OrderMS.payment.Payment;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -10,19 +10,27 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSpecificationExecutor {
 
+//    @Query("""
+//            select p from Payment p inner join Customer c
+//            on c.id = p.customerId
+//            where p.customerId= :customerId
+//            """)
     @Query("""
-            select p from Payment p inner join Customer c
-            on c.id = p.customerId
-            where p.customerId= :customerId
+            select payments from Customer c 
+            where c.id= :customerId
             """)
     List<Payment> retrieveCustomerPayments(@Param("customerId") long customerId);
 
+//    @Query("""
+//            select o from Order o inner join Customer c
+//            on c.id = o.customerId
+//            where o.customerId= :customerId
+//            """)
     @Query("""
-            select o from Order o inner join Customer c
-            on c.id = o.customerId
-            where o.customerId= :customerId
+            select orders from Customer c 
+            where c.id= :customerId
             """)
     List<Order> retrieveCustomerOrders(long customerId);
 
@@ -38,6 +46,4 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     //update customer set address=?, name=?, phone=? where id=?
     //update
-
-
 }

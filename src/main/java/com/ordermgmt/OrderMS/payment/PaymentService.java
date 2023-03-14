@@ -1,5 +1,7 @@
 package com.ordermgmt.OrderMS.payment;
 
+import com.ordermgmt.OrderMS.order.Order;
+
 import java.util.List;
 
 public interface PaymentService {
@@ -14,4 +16,6 @@ public interface PaymentService {
     Payment retrieveSpecificPayment(long paymentId);
 
     List<Payment> retrieveAllPayment();
+
+    Order retrievePaymentOrder(long paymentId);
 }

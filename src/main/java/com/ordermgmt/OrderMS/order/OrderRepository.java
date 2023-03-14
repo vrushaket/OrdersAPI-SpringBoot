@@ -34,9 +34,13 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             """)
     List<Food> findFoodByOrderId(@Param("orderId") long orderId);
 
+//    @Query("""
+//            select c from Order o inner join Customer c
+//            on o.customerId = c.Id
+//            where o.id = :orderId
+//            """)
     @Query("""
-            select c from Order o inner join Customer c
-            on o.customerId = c.Id
+            select customer from Order o
             where o.id = :orderId
             """)
     List<Customer> findCustomerByOrderId(@Param("orderId") long orderId);

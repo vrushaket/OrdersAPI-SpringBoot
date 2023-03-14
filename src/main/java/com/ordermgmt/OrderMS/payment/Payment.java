@@ -31,6 +31,11 @@ public class Payment {
     @JoinColumn(name="customer_id", insertable=false, updatable=false)
     private Customer customer;
 
+    @OneToOne
+    @JsonBackReference
+    @JoinColumn(name = "id")
+    Order order;
+
     public Payment(Long customerId, int amount, String method, String status, Date date) {
         this.customerId = customerId;
         this.amount = amount;

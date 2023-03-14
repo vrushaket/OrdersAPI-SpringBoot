@@ -2,6 +2,7 @@ package com.ordermgmt.OrderMS.customer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.ordermgmt.OrderMS.order.Order;
 import com.ordermgmt.OrderMS.payment.Payment;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -24,8 +25,13 @@ public class Customer {
 
     @JsonIgnore
     @JsonManagedReference
-    @OneToMany(mappedBy="customer",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="customer",fetch = FetchType.LAZY)
     private List<Payment> payments;
+
+    @JsonIgnore
+    @JsonManagedReference
+    @OneToMany(mappedBy="customer",fetch = FetchType.LAZY)
+    private List<Order> orders;
 
     public Customer(String name, String address, String phone) {
         this.name = name;

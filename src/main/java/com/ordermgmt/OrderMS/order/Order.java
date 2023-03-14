@@ -37,27 +37,24 @@ public class Order {
     private long quantity;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-//    @JsonIgnore
     @JoinTable(
             name = "order_items",
             joinColumns = { @JoinColumn(name = "order_id") },
             inverseJoinColumns = { @JoinColumn(name = "food_id") }
     )
-    @JsonBackReference
     private List<Food> foods;
 
-    @OneToOne
-//    @JsonIgnore
+    //    @JsonIgnore
+    @OneToOne(mappedBy = "order")
     @JoinColumn(name = "payment_id", insertable=false, updatable=false)
     private Payment payment;
 
-    @OneToOne
-//    @JsonIgnore
+    @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "customer_id", insertable=false, updatable=false)
     private Customer customer;
 
     @OneToOne
-//    @JsonIgnore
     @JoinColumn(name="delivery_id", insertable=false, updatable=false)
     private Delivery delivery;
 
@@ -69,6 +66,4 @@ public class Order {
         this.quantity = quantity;
         this.foods = foods;
     }
-
-
 }
