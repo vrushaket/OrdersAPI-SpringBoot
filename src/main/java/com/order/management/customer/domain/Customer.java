@@ -2,8 +2,8 @@ package com.order.management.customer.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.order.management.order.Order;
-import com.order.management.payment.Payment;
+import com.order.management.order.domain.Order;
+import com.order.management.payment.domain.Payment;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

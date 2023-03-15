@@ -1,6 +1,6 @@
 package com.order.management.customer.domain;
-import com.order.management.order.Order;
-import com.order.management.payment.Payment;
+import com.order.management.order.domain.Order;
+import com.order.management.payment.domain.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -12,22 +12,12 @@ import java.util.List;
 @Repository
 interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSpecificationExecutor {
 
-//    @Query("""
-//            select p from Payment p inner join Customer c
-//            on c.id = p.customerId
-//            where p.customerId= :customerId
-//            """)
     @Query("""
             select payments from Customer c 
             where c.id= :customerId
             """)
     List<Payment> retrieveCustomerPayments(@Param("customerId") long customerId);
 
-//    @Query("""
-//            select o from Order o inner join Customer c
-//            on c.id = o.customerId
-//            where o.customerId= :customerId
-//            """)
     @Query("""
             select orders from Customer c 
             where c.id= :customerId
@@ -41,9 +31,4 @@ interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSpecifica
             """)
     List<Order> retrieveCustomerOrdersByPhone(@Param("phone") String phone);
 
-    //insert into customer (address, name, phone) values (?, ?, ?)
-    //save
-
-    //update customer set address=?, name=?, phone=? where id=?
-    //update
 }

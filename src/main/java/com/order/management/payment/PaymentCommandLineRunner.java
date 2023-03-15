@@ -1,6 +1,7 @@
 package com.order.management.payment;
 
-import com.order.management.customer.domain.CustomerRepository;
+import com.order.management.payment.domain.PaymentRepository;
+import com.order.management.payment.service.PaymentService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +12,7 @@ import org.springframework.stereotype.Component;
 public class PaymentCommandLineRunner implements CommandLineRunner {
 
     @Autowired
-    PaymentServiceImpl paymentService;
-
-    @Autowired
-    CustomerRepository customerRepository;
+    PaymentService paymentService;
 
     @Autowired
     PaymentRepository paymentRepository;

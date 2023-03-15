@@ -1,8 +1,8 @@
 package com.order.management.customer.domain;
 
 import com.order.management.customer.api.request.CustomerRequest;
-import com.order.management.order.Order;
-import com.order.management.payment.Payment;
+import com.order.management.order.domain.Order;
+import com.order.management.payment.domain.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,34 +24,35 @@ public class CustomerFacade {
         return customerRepository.save(customer);
     }
 
-    public void deleteCustomer(long customerId) {
+    public Customer deleteCustomer(long customerId) {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
-        if (optionalCustomer.isPresent()) {
-            customerRepository.deleteById(customerId);
-        }
+        if (optionalCustomer.isPresent()) customerRepository.deleteById(customerId);
+        return optionalCustomer.get();
     }
 
-    public void updateCustomer(long customerId, Customer Customer) {
+    public Customer updateCustomer(long customerId, CustomerRequest customerRequest) {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+        Customer customer = null;
         if (optionalCustomer.isPresent()) {
             Customer existingCustomer = optionalCustomer.get();
-            existingCustomer.setName(Customer.getName());
-            existingCustomer.setAddress(Customer.getAddress());
-            existingCustomer.setPhone(Customer.getPhone());
-            customerRepository.save(existingCustomer);
+            existingCustomer.setName(customerRequest.getName());
+            existingCustomer.setAddress(customerRequest.getAddress());
+            existingCustomer.setPhone(customerRequest.getPhone());
+            customer = customerRepository.save(existingCustomer);
         }
+        return customer;
     }
 
     public Customer retrieveSpecificCustomer(long customerId) {
-        Optional<Customer> Customer = customerRepository.findById(customerId);
-        if(Customer.isEmpty()) return null;
-        return Customer.get();
+        Optional<Customer> customer = customerRepository.findById(customerId);
+        if(customer.isEmpty()) return null;
+        return customer.get();
     }
 
     public List<Customer> retrieveAllCustomer() {
-        List<Customer> allCustomer = customerRepository.findAll();
-        if(allCustomer.isEmpty()) return null;
-        return allCustomer;
+        List<Customer> customers = customerRepository.findAll();
+        if(customers.isEmpty()) return null;
+        return customers;
     }
 
     public List<Order> retrieveCustomerOrders(long customerId) {

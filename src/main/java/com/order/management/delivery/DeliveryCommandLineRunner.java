@@ -1,5 +1,6 @@
 package com.order.management.delivery;
 
+import com.order.management.delivery.service.DeliveryService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class DeliveryCommandLineRunner implements CommandLineRunner {
 
     @Autowired
-    DeliveryServiceImpl deliveryService;
+    DeliveryService deliveryService;
 
     @Override
     public void run(String... args) throws Exception {

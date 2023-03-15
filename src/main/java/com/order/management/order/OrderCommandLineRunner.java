@@ -1,6 +1,7 @@
 package com.order.management.order;
 
-import com.order.management.food.FoodRepository;
+import com.order.management.food.domain.FoodRepository;
+import com.order.management.order.service.OrderService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class OrderCommandLineRunner implements CommandLineRunner {
 
     @Autowired
-    OrderServiceImpl orderService;
+    OrderService orderService;
 
     @Autowired
     FoodRepository foodRepository;

@@ -1,5 +1,6 @@
 package com.order.management.food;
 
+import com.order.management.food.service.FoodService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class FoodCommandLineRunner implements CommandLineRunner {
 
     @Autowired
-    FoodServiceImpl foodService;
+    FoodService foodService;
 
     @Override
     public void run(String... args) throws Exception {

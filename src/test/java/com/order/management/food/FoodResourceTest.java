@@ -1,5 +1,6 @@
 package com.order.management.food;
 
+import com.order.management.food.api.FoodController;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +29,7 @@ public class FoodResourceTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private FoodResource foodResource;
+    private FoodController foodResource;
 
     @Test
     void methodShouldReturnListOfFood() throws Exception {
