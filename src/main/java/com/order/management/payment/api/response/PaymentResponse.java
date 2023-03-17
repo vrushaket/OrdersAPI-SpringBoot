@@ -2,9 +2,12 @@ package com.order.management.payment.api.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
+import lombok.ToString;
+
 import java.sql.Date;
 
 @Getter
+@ToString
 public class PaymentResponse {
 
     private long id;

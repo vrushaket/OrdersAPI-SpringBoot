@@ -2,8 +2,10 @@ package com.order.management.customer.api.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class CustomerResponse {
 
     private long id;

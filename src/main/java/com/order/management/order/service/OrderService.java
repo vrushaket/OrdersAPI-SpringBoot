@@ -28,9 +28,6 @@ public class OrderService {
     @Autowired
     OrderFacade orderFacade;
 
-//    @Autowired
-//    FoodFacade foodFacade;
-
     public OrderResponse addOrder(OrderRequest orderRequest) {
         Order order = orderFacade.addOrder(orderRequest);
         return new OrderResponse(order.getId(),order.getDate(),order.getQuantity(),order.getFoods(),order.getPayment(),order.getCustomer(),order.getDelivery());
@@ -87,5 +84,4 @@ public class OrderService {
         }
         return customerResponses;
     }
-
 }

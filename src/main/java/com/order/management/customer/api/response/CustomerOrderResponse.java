@@ -5,11 +5,13 @@ import com.order.management.delivery.domain.Delivery;
 import com.order.management.food.domain.Food;
 import com.order.management.payment.domain.Payment;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.sql.Date;
 import java.util.List;
 
 @Getter
+@ToString
 public class CustomerOrderResponse {
 
     private long id;

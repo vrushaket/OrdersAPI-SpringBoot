@@ -38,7 +38,7 @@ public class CustomerService {
     }
 
     public CustomerSummary updateCustomer(long customerId, CustomerRequest customerRequest) {
-        Customer customer = customerFacade.deleteCustomer(customerId);
+        Customer customer = customerFacade.updateCustomer(customerId,customerRequest);
         return new CustomerSummary(customer.getId());
     }
 
