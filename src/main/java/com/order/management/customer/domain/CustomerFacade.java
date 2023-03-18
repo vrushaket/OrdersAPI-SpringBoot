@@ -1,6 +1,7 @@
 package com.order.management.customer.domain;
 
 import com.order.management.customer.api.request.CustomerRequest;
+import com.order.management.customer.exception.CustomerNotFoundException;
 import com.order.management.order.domain.Order;
 import com.order.management.payment.domain.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class CustomerFacade {
 
     public Customer retrieveSpecificCustomer(long customerId) {
         Optional<Customer> customer = customerRepository.findById(customerId);
-        if(customer.isEmpty()) return null;
+        if(customer.isEmpty()) throw new CustomerNotFoundException();
         return customer.get();
     }
 

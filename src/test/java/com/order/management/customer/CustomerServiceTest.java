@@ -12,29 +12,30 @@ import com.order.management.order.domain.Order;
 import com.order.management.payment.api.response.PaymentResponse;
 import com.order.management.payment.domain.Payment;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
+import org.junit.Before;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-@SpringBootTest
-@ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
+@RunWith(MockitoJUnitRunner.class)
 public class CustomerServiceTest {
 
     @Mock
     private CustomerFacade customerFacade;
 
-    @InjectMocks
     private CustomerService customerService;
+
+    @Before
+    public void setUp() throws Exception{
+        customerService = new CustomerService(customerFacade);
+    }
 
     @Test
     public void givenCustomerRequest_shouldAddNewCustomer(){
@@ -44,8 +45,8 @@ public class CustomerServiceTest {
         CustomerSummary expectedCustomerSummary = new CustomerSummary(customer.getId());
         //when
         Mockito.when(customerFacade.addCustomer(customerRequest)).thenReturn(customer);
-        //then
         CustomerSummary actualCustomerSummary = customerService.addCustomer(customerRequest);
+        //then
         Assertions.assertThat(expectedCustomerSummary.getId()).isEqualTo(actualCustomerSummary.getId());
     }
 
@@ -58,8 +59,8 @@ public class CustomerServiceTest {
         CustomerSummary expectedCustomerSummary = new CustomerSummary(customerIdToDelete);
         //when
         Mockito.when(customerFacade.deleteCustomer(customerIdToDelete)).thenReturn(customer);
-        //then
         CustomerSummary actualCustomerSummary = customerService.deleteCustomer(customerIdToDelete);
+        //then
         Assertions.assertThat(expectedCustomerSummary.getId()).isEqualTo(actualCustomerSummary.getId());
     }
 
@@ -72,13 +73,13 @@ public class CustomerServiceTest {
         CustomerSummary expectedCustomerSummary = new CustomerSummary(customer.getId());
         //when
         Mockito.when(customerFacade.updateCustomer(customerIdToUpdate,customerRequest)).thenReturn(customer);
-        //then
         CustomerSummary actualCustomerSummary = customerService.updateCustomer(customerIdToUpdate,customerRequest);
+        //then
         Assertions.assertThat(expectedCustomerSummary.toString()).isEqualTo(actualCustomerSummary.toString());
     }
 
     @Test
-    void givenCustomerId_shouldReturnCustomerResponse(){
+    public void givenCustomerId_shouldReturnCustomerResponse(){
         //given
         long customerId = 1;
         Customer customer = new Customer("Vrushaket","Pune","9595068833");
@@ -86,8 +87,8 @@ public class CustomerServiceTest {
         CustomerResponse expectedCustomerSummary = new CustomerResponse(1,customer.getName(),customer.getAddress(),customer.getPhone());
         //when
         Mockito.when(customerFacade.retrieveSpecificCustomer(customerId)).thenReturn(customer);
-        //then
         CustomerResponse actualCustomerResponse = customerService.retrieveSpecificCustomer(customerId);
+        //then
         Assertions.assertThat(expectedCustomerSummary.toString()).isEqualTo(actualCustomerResponse.toString());
     }
 
@@ -106,8 +107,8 @@ public class CustomerServiceTest {
         }
         //when
         Mockito.when(customerFacade.retrieveAllCustomer()).thenReturn(customers);
-        //then
         List<CustomerResponse> actualCustomerResponses = customerService.retrieveAllCustomer();
+        //then
         Assertions.assertThat(expectedCustomerResponses.toString()).isEqualTo(actualCustomerResponses.toString());
     }
 
@@ -126,8 +127,8 @@ public class CustomerServiceTest {
         }
         //when
         Mockito.when(customerFacade.retrieveCustomerOrders(customerId)).thenReturn(orders);
-        //then
         List<CustomerOrderResponse> actualCustomerOrderResponses = customerService.retrieveCustomerOrders(customerId);
+        //then
         Assertions.assertThat(expectedCustomerOrderResponses.toString()).isEqualTo(actualCustomerOrderResponses.toString());
     }
 
@@ -146,13 +147,14 @@ public class CustomerServiceTest {
         }
         //when
         Mockito.when(customerFacade.retrieveCustomerOrders(customerId)).thenReturn(orders);
-        //then
         List<CustomerOrderResponse> actualCustomerOrderResponses = customerService.retrieveCustomerOrders(customerId);
+        //then
         Assertions.assertThat(expectedCustomerOrderResponses.toString()).isEqualTo(actualCustomerOrderResponses.toString());
     }
 
     @Test
     public void givenCustomerId_shouldReturnCustomerPayments(){
+        //given
         long customerId = 1l;
         List<Payment> payments = new ArrayList<>();
         payments.add(new Payment(1l,100,"UPI","success",new Date(2023,03,18)));
@@ -163,8 +165,8 @@ public class CustomerServiceTest {
         }
         //when
         Mockito.when(customerFacade.retrieveCustomerPayments(customerId)).thenReturn(payments);
-        //then
         List<PaymentResponse> actualPaymentResponses = customerService.retrieveCustomerPayments(customerId);
+        //then
         Assertions.assertThat(expectedPaymentResponses.toString()).isEqualTo(actualPaymentResponses.toString());
     }
 }

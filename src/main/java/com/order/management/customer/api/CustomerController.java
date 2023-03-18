@@ -2,6 +2,7 @@ package com.order.management.customer.api;
 
 import com.order.management.customer.api.response.CustomerOrderResponse;
 import com.order.management.customer.api.response.CustomerResponse;
+import com.order.management.customer.exception.CustomerNotFoundException;
 import com.order.management.customer.service.CustomerService;
 import com.order.management.customer.api.request.CustomerRequest;
 import com.order.management.customer.api.response.CustomerSummary;
@@ -10,6 +11,7 @@ import com.order.management.order.domain.Order;
 import com.order.management.payment.api.response.PaymentResponse;
 import com.order.management.payment.domain.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +38,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerResponse);
     }
 
-    @PostMapping("/customers")
+    @PostMapping()
     ResponseEntity<CustomerSummary> addCustomer(@RequestBody CustomerRequest customerRequest){
         CustomerSummary customerSummary = customerService.addCustomer(customerRequest);
         return ResponseEntity.ok(customerSummary);
@@ -74,4 +76,8 @@ public class CustomerController {
         if(orderResponses == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(orderResponses);
     }
+
+//    @ExceptionHandler
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    private void CustomerNotFoundHandler(CustomerNotFoundException customerNotFoundException){}
 }
