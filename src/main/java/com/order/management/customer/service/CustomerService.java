@@ -6,7 +6,6 @@ import com.order.management.customer.domain.Customer;
 import com.order.management.customer.domain.CustomerFacade;
 import com.order.management.customer.api.request.CustomerRequest;
 import com.order.management.customer.api.response.CustomerSummary;
-import com.order.management.order.api.response.OrderResponse;
 import com.order.management.order.domain.Order;
 import com.order.management.payment.api.response.PaymentResponse;
 import com.order.management.payment.domain.Payment;

@@ -27,7 +27,8 @@ public class CustomerFacade {
 
     public Customer deleteCustomer(long customerId) {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
-        if (optionalCustomer.isPresent()) customerRepository.deleteById(customerId);
+        if (!optionalCustomer.isPresent()) throw new CustomerNotFoundException("id: "+customerId);
+        customerRepository.deleteById(customerId);
         return optionalCustomer.get();
     }
 
@@ -46,13 +47,13 @@ public class CustomerFacade {
 
     public Customer retrieveSpecificCustomer(long customerId) {
         Optional<Customer> customer = customerRepository.findById(customerId);
-        if(customer.isEmpty()) throw new CustomerNotFoundException();
+        if(customer.isEmpty()) throw new CustomerNotFoundException("id: "+customerId);
         return customer.get();
     }
 
     public List<Customer> retrieveAllCustomer() {
         List<Customer> customers = customerRepository.findAll();
-        if(customers.isEmpty()) return null;
+        if(customers.isEmpty()) throw new CustomerNotFoundException("");
         return customers;
     }
 

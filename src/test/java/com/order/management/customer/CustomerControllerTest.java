@@ -203,7 +203,6 @@ public class CustomerControllerTest {
         String expectedOrderResponse = """
                 [{"id":0,"date":"3923-04-12","quantity":1,"foods":[{"id":0,"name":"Fries","price":80}],"payment":{"id":0,"customerId":5,"amount":2200,"method":"UPI","status":"success","date":"3923-04-12"},"delivery":{"id":0,"status":"waiting"}}]
                 """;
-
         List<Food> foods = new ArrayList<>();
         foods.add(new Food("Fries",80));
         Payment payment = new Payment(5l,2200,"UPI","success",new Date(2023,03,12));
@@ -217,7 +216,6 @@ public class CustomerControllerTest {
                                         .get(SPECIFIC_CUSTOMER_ORDERS_URL))
                                         .andExpect(status().isOk())
                                         .andReturn();
-
         //then
         System.out.println(mvcResult.getResponse().getContentAsString());
         Assertions.assertThat(expectedOrderResponse.trim()).isEqualTo(mvcResult.getResponse().getContentAsString());
