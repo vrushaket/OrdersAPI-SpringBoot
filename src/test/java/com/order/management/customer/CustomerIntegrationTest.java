@@ -16,8 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CustomerIntegrationTest {
@@ -40,7 +38,7 @@ public class CustomerIntegrationTest {
     }
 
     @Test
-    public void givenCustomerId_shouldReturnCustomer(){
+    public void givenCustomerId_toRetrieveCustomer_shouldReturnCustomer(){
         //given
         CustomerResponse expectedCustomerResponse = new CustomerResponse(1,"Vrushaket","Pune","9595068833");
         //when
@@ -51,7 +49,7 @@ public class CustomerIntegrationTest {
     }
 
     @Test
-    public void givenCustomerRequest_shouldAddNewCustomer(){
+    public void givenCustomerRequest_toAddCustomer_shouldAddNewCustomer(){
         //given
         CustomerRequest customerRequest = new CustomerRequest("Vrushaket","Pune","9595068833");
         //when
@@ -64,7 +62,7 @@ public class CustomerIntegrationTest {
     }
 
     @Test
-    public void givenCustomerId_shouldDeleteCustomer(){
+    public void givenCustomerId_toDeleteCustomer_shouldDeleteCustomer(){
         //given
         long customerId = 10;
         //when
@@ -76,7 +74,7 @@ public class CustomerIntegrationTest {
     }
 
     @Test
-    public void givenCustomerIdAndCustomerRequest_shouldUpdateCustomer(){
+    public void givenCustomerIdAndCustomerRequest_toUpdateCustomer_shouldUpdateCustomer(){
         //given
         long customerId = 11;
         CustomerRequest customerRequest = new CustomerRequest("Ram","Pune","8877665544");
@@ -89,7 +87,7 @@ public class CustomerIntegrationTest {
     }
 
     @Test
-    public void givenCustomerId_shouldReturnCustomerPayments() throws JSONException {
+    public void givenCustomerId_toRetrieveCustomerPayments_shouldReturnCustomerPayments() throws JSONException {
         //given
         long customerId = 1;
         String expectedResponseBodyContent = """
@@ -119,7 +117,7 @@ public class CustomerIntegrationTest {
     }
 
     @Test
-    public void givenCustomerId_shouldReturnCustomerOrders() throws JSONException {
+    public void givenCustomerId_toRetrieveCustomerOrders_shouldReturnCustomerOrders() throws JSONException {
         //given
         long customerId = 1;
         String expectedResponseBodyContent = """

@@ -1,4 +1,5 @@
 package com.order.management.customer.domain;
+import com.order.management.food.api.response.FoodResponse;
 import com.order.management.order.domain.Order;
 import com.order.management.payment.domain.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,7 +23,7 @@ interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSpecifica
             select orders from Customer c 
             where c.id= :customerId
             """)
-    List<Order> retrieveCustomerOrders(long customerId);
+    List<Order> retrieveCustomerOrders(@Param("customerId") long customerId);
 
     @Query(value = """
             select o from Order o inner join Customer c

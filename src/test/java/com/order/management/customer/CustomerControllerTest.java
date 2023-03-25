@@ -77,7 +77,7 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void givenCustomerId_shouldReturnCustomerResponse() throws Exception {
+    public void givenCustomerId_toRetrieveCustomer_shouldReturnCustomerResponse() throws Exception {
         //given
         long customerId = 1l;
         String expectedCustomerResponse = """
@@ -130,7 +130,7 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void givenCustomerId_shouldDeleteAssociatedCustomer() throws Exception {
+    public void givenCustomerId_toDeleteCustomer_shouldDeleteAssociatedCustomer() throws Exception {
         //given
         long customerId = 1l;
         CustomerSummary customerSummary = new CustomerSummary(customerId);
@@ -149,7 +149,7 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void givenCustomerRequestAndId_shouldUpdateCustomer() throws Exception {
+    public void givenCustomerRequestAndId_toUpdateCustomer_shouldUpdateCustomer() throws Exception {
         //given
         long customerId = 1l;
         String customerRequest= """
@@ -174,7 +174,7 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void givenCustomerId_shouldReturnCustomerPaymentResponse() throws Exception {
+    public void givenCustomerId_toRetrieveCustomerPayments_shouldReturnCustomerPaymentResponse() throws Exception {
         //given
         long customerId = 1;
         String expectedCustomerResponse = """
@@ -197,7 +197,7 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void givenCustomerId_shouldReturnCustomerOrderResponse() throws Exception {
+    public void givenCustomerId_toRetrieveCustomerOrders_shouldReturnCustomerOrderResponse() throws Exception {
         //given
         long customerId = 1;
         String expectedOrderResponse = """

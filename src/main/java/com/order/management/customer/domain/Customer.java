@@ -25,17 +25,27 @@ public class Customer {
 
     @JsonIgnore
     @JsonManagedReference
-    @OneToMany(mappedBy="customer",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="customer")
     private List<Payment> payments;
 
     @JsonIgnore
     @JsonManagedReference
-    @OneToMany(mappedBy="customer",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="customer")
     private List<Order> orders;
 
     public Customer(String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

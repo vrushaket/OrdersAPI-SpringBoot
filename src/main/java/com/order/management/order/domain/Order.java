@@ -64,4 +64,16 @@ public class Order {
         this.quantity = quantity;
         this.foods = foods;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", paymentId=" + paymentId +
+                ", deliveryId=" + deliveryId +
+                ", date=" + date +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

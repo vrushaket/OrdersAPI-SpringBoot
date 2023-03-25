@@ -16,6 +16,7 @@ import org.junit.Before;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -38,7 +39,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void givenCustomerRequest_shouldAddNewCustomer(){
+    public void givenCustomerCreateRequest_shouldAddNewCustomer(){
         //given
         CustomerRequest customerRequest = new CustomerRequest("Vrushaket","Pune","9595068833");
         Customer customer = new Customer(customerRequest.getName(),customerRequest.getAddress(),customerRequest.getPhone());
@@ -51,7 +52,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void givenCustomerId_shouldDeleteCustomer(){
+    public void givenCustomerId_toDeleteCustomer_shouldDeleteCustomer(){
         //given
         long customerIdToDelete = 1;
         Customer customer = new Customer("Vrushaket","Pune","9595068833");
@@ -65,7 +66,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void givenCustomerIdAndCustomerRequest_shouldUpdateCustomer(){
+    public void givenCustomerIdAndCustomerRequest_toUpdateCustomer_shouldUpdateCustomer(){
         //given
         long customerIdToUpdate= 1;
         CustomerRequest customerRequest = new CustomerRequest("Vrushaket","Pune","9595068833");
@@ -79,14 +80,14 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void givenCustomerId_shouldReturnCustomerResponse(){
+    public void givenCustomerId_toRetrieveCustomerRequest_shouldReturnCustomerResponse(){
         //given
         long customerId = 1;
         Customer customer = new Customer("Vrushaket","Pune","9595068833");
         customer.setId(customerId);
         CustomerResponse expectedCustomerSummary = new CustomerResponse(1,customer.getName(),customer.getAddress(),customer.getPhone());
+        BDDMockito.given(customerFacade.retrieveSpecificCustomer(customerId)).willReturn(customer);
         //when
-        Mockito.when(customerFacade.retrieveSpecificCustomer(customerId)).thenReturn(customer);
         CustomerResponse actualCustomerResponse = customerService.retrieveSpecificCustomer(customerId);
         //then
         Assertions.assertThat(expectedCustomerSummary.toString()).isEqualTo(actualCustomerResponse.toString());
@@ -113,7 +114,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void givenCustomerId_shouldReturnCustomerOrderResponse(){
+    public void givenCustomerId__toRetrieveCustomerOrders_shouldReturnCustomerOrderResponse(){
         long customerId = 1l;
         List<Order> orders = new ArrayList<>();
         List<Food> foodList = new ArrayList<>();
@@ -133,7 +134,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void givenCustomerPhone_shouldReturnCustomerOrderResponse(){
+    public void givenCustomerPhone_toRetrieveCustomerOrderByPhone_shouldReturnCustomerOrderResponse(){
         long customerId = 1l;
         List<Order> orders = new ArrayList<>();
         List<Food> foodList = new ArrayList<>();
@@ -153,7 +154,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void givenCustomerId_shouldReturnCustomerPayments(){
+    public void givenCustomerId_toRetrieveCustomerPayments_shouldReturnCustomerPayments(){
         //given
         long customerId = 1l;
         List<Payment> payments = new ArrayList<>();

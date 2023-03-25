@@ -34,15 +34,12 @@ public class CustomerFacade {
 
     public Customer updateCustomer(long customerId, CustomerRequest customerRequest) {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
-        Customer customer = null;
-        if (optionalCustomer.isPresent()) {
-            Customer existingCustomer = optionalCustomer.get();
-            existingCustomer.setName(customerRequest.getName());
-            existingCustomer.setAddress(customerRequest.getAddress());
-            existingCustomer.setPhone(customerRequest.getPhone());
-            customer = customerRepository.save(existingCustomer);
-        }
-        return customer;
+        if (!optionalCustomer.isPresent()) throw new CustomerNotFoundException("id: "+customerId);
+        Customer existingCustomer = optionalCustomer.get();
+        existingCustomer.setName(customerRequest.getName());
+        existingCustomer.setAddress(customerRequest.getAddress());
+        existingCustomer.setPhone(customerRequest.getPhone());
+        return customerRepository.save(existingCustomer);
     }
 
     public Customer retrieveSpecificCustomer(long customerId) {
