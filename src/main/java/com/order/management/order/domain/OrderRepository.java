@@ -43,5 +43,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             select customer from Order o
             where o.id = :orderId
             """)
-    List<Customer> findCustomerByOrderId(@Param("orderId") long orderId);
+    Customer findCustomerByOrderId(@Param("orderId") long orderId);
 }

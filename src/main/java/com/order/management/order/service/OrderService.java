@@ -76,12 +76,9 @@ public class OrderService {
         return foodResponses;
 
     }
-    public List<CustomerResponse> retrieveOrderCustomer(long orderId) {
-        List<Customer> customers = orderFacade.retrieveOrderCustomer(orderId);
-        List<CustomerResponse> customerResponses = new ArrayList<>();
-        for (Customer customer: customers) {
-            customerResponses.add(new CustomerResponse(customer.getId(),customer.getName(),customer.getAddress(),customer.getPhone()));
-        }
-        return customerResponses;
+    public CustomerResponse retrieveOrderCustomer(long orderId) {
+        Customer customer = orderFacade.retrieveOrderCustomer(orderId);
+        CustomerResponse customerResponse = new CustomerResponse(customer.getId(),customer.getName(),customer.getAddress(),customer.getPhone());
+        return customerResponse;
     }
 }

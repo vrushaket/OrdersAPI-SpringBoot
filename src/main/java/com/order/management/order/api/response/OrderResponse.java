@@ -33,4 +33,17 @@ public class OrderResponse {
         this.customer = customer;
         this.delivery = delivery;
     }
+
+    @Override
+    public String toString() {
+        return "OrderResponse{" +
+                "id=" + id +
+                ", date=" + date +
+                ", quantity=" + quantity +
+                ", foods=" + foods +
+                ", payment=" + payment +
+                ", customer=" + customer +
+                ", delivery=" + delivery +
+                '}';
+    }
 }
