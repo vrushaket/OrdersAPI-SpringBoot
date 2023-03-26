@@ -39,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(CustomerController.class)  //doesn't start all the component, but start only the necessary components
+@WebMvcTest(CustomerController.class)
 public class CustomerControllerTest {
 
     private static String GENERIC_CUSTOMERS_URL = "http://localhost:8000/customers";

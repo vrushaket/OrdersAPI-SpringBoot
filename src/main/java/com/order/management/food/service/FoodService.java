@@ -12,9 +12,11 @@ import java.util.List;
 @Service
 public class FoodService  {
 
-    @Autowired
     FoodFacade foodFacade;
 
+    public FoodService(FoodFacade foodFacade) {
+        this.foodFacade = foodFacade;
+    }
     public FoodResponse addFood(FoodRequest foodRequest) {
         Food food = foodFacade.addFood(foodRequest);
         return new FoodResponse(food.getId(),food.getName(),food.getPrice());

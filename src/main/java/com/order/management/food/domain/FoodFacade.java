@@ -1,6 +1,7 @@
 package com.order.management.food.domain;
 
 import com.order.management.food.api.request.FoodRequest;
+import com.order.management.food.exception.FoodNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,27 +25,23 @@ public class FoodFacade  {
 
     public Food deleteFood(long foodId) {
         Optional<Food> optionalFood = foodRepository.findById(foodId);
-        if (optionalFood.isPresent()) {
-            foodRepository.deleteById(foodId);
-        }
+        if (!optionalFood.isPresent()) throw new FoodNotFoundException("id : "+ foodId);
+        foodRepository.deleteById(foodId);
         return optionalFood.get();
     }
 
     public Food updateFood(long foodId, FoodRequest foodRequest) {
         Optional<Food> optionalFood = foodRepository.findById(foodId);
-        Food food = null;
-        if (optionalFood.isPresent()) {
-            Food existingFood = optionalFood.get();
-            existingFood.setName(foodRequest.getName());
-            existingFood.setPrice(foodRequest.getPrice());
-            food = foodRepository.save(existingFood);
-        }
-        return food;
+        if (!optionalFood.isPresent())  throw new FoodNotFoundException("id : "+foodId);
+        Food existingFood = optionalFood.get();
+        existingFood.setName(foodRequest.getName());
+        existingFood.setPrice(foodRequest.getPrice());
+        return foodRepository.save(existingFood);
     }
 
     public Food retrieveSpecificFood(long foodId) {
         Optional<Food> food = foodRepository.findById(foodId);
-        if(food.isEmpty()) return null;
+        if(food.isEmpty()) throw new FoodNotFoundException("id : "+foodId );
         return food.get();
     }
 

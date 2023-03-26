@@ -48,7 +48,7 @@ public class CustomerServiceTest {
         Mockito.when(customerFacade.addCustomer(customerRequest)).thenReturn(customer);
         CustomerSummary actualCustomerSummary = customerService.addCustomer(customerRequest);
         //then
-        Assertions.assertThat(expectedCustomerSummary.getId()).isEqualTo(actualCustomerSummary.getId());
+        Assertions.assertThat(expectedCustomerSummary.toString()).isEqualTo(actualCustomerSummary.toString());
     }
 
     @Test
@@ -62,7 +62,7 @@ public class CustomerServiceTest {
         Mockito.when(customerFacade.deleteCustomer(customerIdToDelete)).thenReturn(customer);
         CustomerSummary actualCustomerSummary = customerService.deleteCustomer(customerIdToDelete);
         //then
-        Assertions.assertThat(expectedCustomerSummary.getId()).isEqualTo(actualCustomerSummary.getId());
+        Assertions.assertThat(expectedCustomerSummary.toString()).isEqualTo(actualCustomerSummary.toString());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void methodShouldReturnAllCustomers(){
+    public void givenRequestToRetrieveAllCustomer_shouldReturnAllCustomersResponse(){
         //given
         List<Customer> customers = new ArrayList<>();
         Customer customer1 = new Customer("Vrushaket","Pune","9595068833");

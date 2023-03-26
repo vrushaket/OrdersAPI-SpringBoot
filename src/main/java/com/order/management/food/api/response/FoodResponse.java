@@ -16,4 +16,13 @@ public class FoodResponse {
         this.name = name;
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "FoodResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

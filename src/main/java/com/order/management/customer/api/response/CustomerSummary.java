@@ -14,4 +14,11 @@ public class CustomerSummary {
     public CustomerSummary(long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerSummary{" +
+                "id=" + id +
+                '}';
+    }
 }

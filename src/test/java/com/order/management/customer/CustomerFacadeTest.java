@@ -93,7 +93,7 @@ public class CustomerFacadeTest {
     }
 
     @Test(expected = CustomerNotFoundException.class)
-    public void givenUnKnownCustomerId_toDeleteCustomer_shouldThrowCustomerNotFoundExpection(){
+    public void givenUnKnownCustomerId_toDeleteCustomer_shouldThrowCustomerNotFoundException(){
         //given
         long customerId = 1000;
         //when
