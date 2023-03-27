@@ -34,7 +34,7 @@ public class FoodController {
         return ResponseEntity.ok(foodResponse);
     }
 
-    @PostMapping(value = "/foods",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<FoodResponse> addFood(@RequestBody FoodRequest foodRequest){
         FoodResponse foodResponse = foodService.addFood(foodRequest);
         return ResponseEntity.ok(foodResponse);
