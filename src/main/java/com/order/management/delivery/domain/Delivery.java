@@ -16,4 +16,12 @@ public class Delivery {
     public Delivery(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Delivery{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

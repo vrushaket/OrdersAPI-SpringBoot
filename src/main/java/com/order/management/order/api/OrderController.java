@@ -75,9 +75,9 @@ public class OrderController {
     }
 
     @GetMapping(value = "/{orderId}/customer", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<CustomerResponse>> retrieveOrderCustomer(@PathVariable long orderId){
-        List<CustomerResponse> customerResponses = orderService.retrieveOrderCustomer(orderId);
-        if(customerResponses == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(customerResponses);
+    ResponseEntity<CustomerResponse> retrieveOrderCustomer(@PathVariable long orderId){
+        CustomerResponse customerResponse = orderService.retrieveOrderCustomer(orderId);
+        if(customerResponse == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(customerResponse);
     }
 }

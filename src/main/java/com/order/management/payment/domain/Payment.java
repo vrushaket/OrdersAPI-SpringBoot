@@ -43,4 +43,16 @@ public class Payment {
         this.status = status;
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", amount=" + amount +
+                ", method='" + method + '\'' +
+                ", status='" + status + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }
