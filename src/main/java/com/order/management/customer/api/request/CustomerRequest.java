@@ -16,4 +16,13 @@ public class CustomerRequest {
         this.address = address;
         this.phone = phone;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerRequest{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSpecificationExecutor {
+interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query("""
             select payments from Customer c 
@@ -31,5 +31,4 @@ interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSpecifica
             where c.phone= :phone
             """)
     List<Order> retrieveCustomerOrdersByPhone(@Param("phone") String phone);
-
 }

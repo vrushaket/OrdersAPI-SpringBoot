@@ -1,17 +1,15 @@
 package com.order.management.customer.api;
 
+import com.order.management.demo.Person;
 import com.order.management.customer.api.response.CustomerOrderResponse;
 import com.order.management.customer.api.response.CustomerResponse;
-import com.order.management.customer.exception.CustomerNotFoundException;
 import com.order.management.customer.service.CustomerService;
 import com.order.management.customer.api.request.CustomerRequest;
 import com.order.management.customer.api.response.CustomerSummary;
-import com.order.management.order.api.response.OrderResponse;
-import com.order.management.order.domain.Order;
+import com.order.management.demo.Vehicle;
 import com.order.management.payment.api.response.PaymentResponse;
-import com.order.management.payment.domain.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +22,13 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    ApplicationContext applicationContext;
+
+    @Autowired
+//    @Qualifier("Car")
+    Vehicle vehicle;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<CustomerResponse>> retrieveAllCustomer(){
@@ -77,6 +82,19 @@ public class CustomerController {
         if(orderResponses == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(orderResponses);
     }
+
+    @GetMapping(value = "/random", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<String> retrieveCustomerOrdersByPhone(){
+
+        Person person1 = (Person) applicationContext.getBean("personSingleton");
+        Person person2 = (Person) applicationContext.getBean("personSingleton");
+
+        person1.setNumber(Math.random()*100);
+
+        return ResponseEntity.ok(person1.getNumber()+" "+person2.getNumber()
+                +"\nVehicle: "+vehicle.getModel());
+    }
+
 
 //    @ExceptionHandler
 //    @ResponseStatus(HttpStatus.NOT_FOUND)

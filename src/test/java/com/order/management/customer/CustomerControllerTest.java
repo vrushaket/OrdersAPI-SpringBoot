@@ -113,8 +113,7 @@ public class CustomerControllerTest {
                 """;
         CustomerRequest customerRequestBody = new CustomerRequest("Raj","Pune","8877665544");
         CustomerSummary customerSummary = new CustomerSummary(anyLong());
-        when(customerService.addCustomer(customerRequestBody)).thenReturn(customerSummary);
-
+        given(customerService.addCustomer(customerRequestBody)).willReturn(customerSummary);
         //when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
                                             .post(GENERIC_CUSTOMERS_URL)
@@ -134,7 +133,7 @@ public class CustomerControllerTest {
         //given
         long customerId = 1l;
         CustomerSummary customerSummary = new CustomerSummary(customerId);
-        when(customerService.deleteCustomer(customerId)).thenReturn(customerSummary);
+        given(customerService.deleteCustomer(customerId)).willReturn(customerSummary);
 
         //when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
