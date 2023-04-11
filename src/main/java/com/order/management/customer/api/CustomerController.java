@@ -11,15 +11,18 @@ import com.order.management.order.domain.Order;
 import com.order.management.payment.api.response.PaymentResponse;
 import com.order.management.payment.domain.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.web.annotation.RestControllerEndpoint;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/customers")
+@RestControllerEndpoint(id = "customers")
 public class CustomerController {
 
     @Autowired
@@ -77,6 +80,7 @@ public class CustomerController {
         if(orderResponses == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(orderResponses);
     }
+
 
 //    @ExceptionHandler
 //    @ResponseStatus(HttpStatus.NOT_FOUND)
